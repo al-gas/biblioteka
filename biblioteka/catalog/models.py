@@ -105,8 +105,8 @@ class Borrower(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
-    phone_number = models.IntegerField(null=True, blank=False, max_length=10)
-    email = models.EmailField(null=True, blank= False, max_length=100)
+    phone_number = models.IntegerField(null=True, blank=True, max_length=10)
+    email = models.EmailField(null=True, blank=True, max_length=100)
 
     class Meta:
         ordering = ['last_name', 'first_name']
