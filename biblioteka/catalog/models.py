@@ -125,8 +125,8 @@ class BooksOnLoan(models.Model):
     book_id = models.ForeignKey('BookInstance', on_delete=models.SET_NULL, null=True)
     borrower_id = models.ForeignKey('Borrower', on_delete=models.SET_NULL, null=True)
 
-    class Meta:
-        ordering = ['last_name', 'first_name']
+    # class Meta:
+    #     ordering = ['last_name', 'first_name']
 
     def get_absolute_url(self):
         """Returns the url to access a particular author instance."""
