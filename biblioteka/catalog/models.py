@@ -96,3 +96,43 @@ class Author(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return f'{self.last_name}, {self.first_name}'
+
+
+class Borrower(models.Model):
+    """Model representing an author."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+                          help_text='Unique ID for this particular borrower')
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    date_of_birth = models.DateField(null=True, blank=True)
+    phone_number = models.IntegerField(null=True, blank=False, max_length=10)
+    email = models.EmailField(null=True, blank= False, max_length=100)
+
+    class Meta:
+        ordering = ['last_name', 'first_name']
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular author instance."""
+        return reverse('borrower-detail', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.last_name}, {self.first_name}'
+
+
+class BooksOnLoan(models.Model):
+    """Model representing an author."""
+    book_id = models.ForeignKey('BookInstance', on_delete=models.SET_NULL, null=True)
+    borrower_id = models.ForeignKey('Borrower', on_delete=models.SET_NULL, null=True)
+
+    class Meta:
+        ordering = ['last_name', 'first_name']
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular author instance."""
+        return reverse('book-on-loans', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.book_id}, {self.borrower_id}'
+
