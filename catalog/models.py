@@ -19,8 +19,8 @@ class Genre(models.Model):
 
 class Language(models.Model):
     """Model representing a Language (e.g. English, French, Japanese, etc.)"""
-    name = models.CharField(max_length=200,
-                            help_text="Enter the book's natural language (e.g. English, French, Japanese etc.)")
+    name = models.CharField(max_length=200, verbose_name="Язык",
+                            help_text="Введите язык на котором написанна книга (на пр. Русский, Английский, Греческий)")
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
@@ -61,10 +61,10 @@ class BookInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           help_text="Unique ID for this particular book across whole library")
-    book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
+    book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True, verbose_name='Книга')
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
-    borrower = models.ForeignKey('Borrower', on_delete=models.SET_NULL, null=True, blank=True)
+    borrower = models.ForeignKey('Borrower', on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Читатель")
 
     @property
     def is_overdue(self):
@@ -99,12 +99,12 @@ class Borrower(models.Model):
     """Model representing an author."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           help_text="Unique ID for a borrower")
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    patronomic_name = models.CharField(max_length=100, null=True)
-    date_of_birth = models.DateField(null=True, blank=True)
-    phone = PhoneNumberField(null=True, blank=True, unique=False)
-    email = models.EmailField(null=True, blank=True)
+    first_name = models.CharField(max_length=100, verbose_name="Фамилия")
+    last_name = models.CharField(max_length=100, verbose_name="Имя")
+    patronomic_name = models.CharField(max_length=100, null=True, verbose_name="Отчество")
+    date_of_birth = models.DateField(null=True, blank=True, verbose_name="Дата рождения")
+    phone = PhoneNumberField(null=True, blank=True, unique=False, verbose_name="Телефон")
+    email = models.EmailField(null=True, blank=True, verbose_name="Эл. почта")
 
     class Meta:
         ordering = ['last_name', 'first_name', 'patronomic_name']
@@ -120,9 +120,9 @@ class Borrower(models.Model):
 
 class Author(models.Model):
     """Model representing an author."""
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    patronomic_name = models.CharField(max_length=100, null=True)
+    first_name = models.CharField(max_length=100, verbose_name="Фамилия")
+    last_name = models.CharField(max_length=100, verbose_name="Имя")
+    patronomic_name = models.CharField(max_length=100, null=True, verbose_name="Отчество")
     # date_of_birth = models.DateField(null=True, blank=True)
     # date_of_death = models.DateField('died', null=True, blank=True)
 
