@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h2>Welcome to the Library</h2>
+<p>It is a Parish Library of the Russian Orthodox Church in Harolds Cross, Dublin</p>
+
+<div>
+{% load static %}
+<img src="{% static "images/front_page.jpg" %}" alt="My image" style="width:555px;height:540px;"/>
+</div>  
+
+
+<h2>Dynamic content</h2>
+
+<p>The library has the following record counts:</p>
+<ul>
+<li><strong>Books:</strong> {{ num_books }}</li>
+<li><strong>Copies:</strong> {{ num_instances }}</li>
+<li><strong>Copies available:</strong> {{ num_instances_available }}</li>
+<li><strong>Authors:</strong> {{ num_authors }}</li>
+</ul>
+
+
+You have visited this page {{ num_visits }} times.
+
+{% endblock %}

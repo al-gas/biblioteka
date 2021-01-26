@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Читательский лист</h1>
+
+{% if borrower_list %}
+  <ul>
+
+  {% for borrower in borrower_list %}
+    <li>
+      <a href="{{ borrower.get_absolute_url }}">
+      {{ borrower }} ({{borrower.date_of_birth}})
+      </a>
+    </li>
+  {% endfor %}
+
+ </ul>
+{% else %}
+  <p>Нет читателей.</p>
+{% endif %}
+        
+        
+        
+{% endblock %}
+
